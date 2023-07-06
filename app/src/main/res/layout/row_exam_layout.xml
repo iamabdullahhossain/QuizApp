@@ -1,0 +1,159 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:id="@+id/questionTV"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="5dp"
+                android:textColor="@color/purple_700"
+                android:textSize="16dp"
+                android:textStyle="bold"
+                tools:text="Q: Which one is the national animal of bangladesh?" />
+
+            <TextView
+                android:id="@+id/optionATV"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/questionTV"
+                android:layout_alignParentStart="true"
+                android:layout_marginStart="20dp"
+                android:layout_marginBottom="5dp"
+                android:text="a) Tiger"
+                android:textColor="@color/black"
+                android:textSize="16dp" />
+
+            <TextView
+                android:id="@+id/optionBTV"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/optionATV"
+                android:layout_marginStart="20dp"
+                android:layout_marginBottom="5dp"
+                android:text="b) Lion"
+                android:textColor="@color/black"
+                android:textSize="16dp" />
+
+            <TextView
+                android:id="@+id/optionCTV"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/optionBTV"
+                android:layout_alignParentStart="true"
+                android:layout_marginStart="20dp"
+                android:layout_marginBottom="5dp"
+                android:text="c) Cat"
+                android:textColor="@color/black"
+                android:textSize="16dp" />
+
+            <TextView
+                android:id="@+id/optionDTV"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/optionCTV"
+                android:layout_marginStart="20dp"
+                android:layout_marginBottom="5dp"
+                android:text="d) Dog"
+                android:textColor="@color/black"
+                android:textSize="16dp" />
+
+            <TextView
+                android:id="@+id/totalMarksTV"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/optionDTV"
+                android:layout_marginStart="10dp"
+                android:layout_marginBottom="5dp"
+                android:text="Total Marks: 1"
+                android:textColor="@color/purple_700"
+                android:textSize="16dp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/headline2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/totalMarksTV"
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="10dp"
+                android:text="Choose The Right Answer"
+                android:textColor="@color/purple_700"
+                android:textSize="16dp" />
+
+            <RadioGroup
+                android:id="@+id/radioGroup"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/headline2"
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginEnd="10dp"
+                android:layout_marginBottom="10dp">
+
+                <RadioButton
+                    android:id="@+id/optionARadio"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:buttonTint="@color/purple_700"
+                    android:text="Option A"
+                    android:textSize="16dp" />
+
+                <RadioButton
+                    android:id="@+id/optionBRadio"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:buttonTint="@color/purple_700"
+                    android:text="Option B"
+                    android:textSize="16dp" />
+
+                <RadioButton
+                    android:id="@+id/optionCRadio"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:buttonTint="@color/purple_700"
+                    android:text="Option C"
+                    android:textSize="16dp" />
+
+                <RadioButton
+                    android:id="@+id/optionDRadio"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:buttonTint="@color/purple_700"
+                    android:text="Option D"
+                    android:textSize="16dp" />
+
+
+            </RadioGroup>
+
+            <EditText
+                android:id="@+id/answerET"
+                android:layout_width="match_parent"
+                android:layout_height="100dp"
+                android:layout_below="@id/radioGroup"
+                android:layout_margin="10dp"
+                android:background="@drawable/custom_edit_text"
+                android:gravity="top"
+                android:hint="Write Correct Answer"
+                android:minLines="20"
+                android:padding="10dp"
+                android:visibility="visible" />
+
+
+        </RelativeLayout>
+    </androidx.cardview.widget.CardView>
+
+</RelativeLayout>

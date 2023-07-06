@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <TextView
+        android:id="@+id/headline"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="30dp"
+        android:text="TRUE-FALSE Question"
+        android:textColor="@color/purple_700"
+        android:textStyle="bold" />
+
+
+    <EditText
+        android:id="@+id/questionET"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:layout_below="@id/headline"
+        android:layout_margin="10dp"
+        android:background="@drawable/custom_edit_text"
+        android:hint="Question..."
+        android:padding="10dp" />
+
+    <EditText
+        android:id="@+id/optionOneET"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:layout_below="@id/questionET"
+        android:layout_marginStart="10dp"
+        android:layout_marginEnd="10dp"
+        android:hint="Option A"
+        android:padding="10dp" />
+
+    <EditText
+        android:id="@+id/optionTwoET"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:layout_below="@id/optionOneET"
+        android:layout_marginStart="10dp"
+        android:layout_marginEnd="10dp"
+        android:hint="Option B"
+        android:padding="10dp" />
+
+    <EditText
+        android:id="@+id/totalMarksET"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:layout_below="@id/optionTwoET"
+        android:layout_marginStart="10dp"
+        android:layout_marginEnd="10dp"
+        android:hint="Marks of this question"
+        android:inputType="number"
+        android:padding="10dp" />
+
+
+    <TextView
+        android:id="@+id/headline2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/totalMarksET"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="10dp"
+        android:text="Choose Right Answer"
+        android:textColor="@color/purple_700"
+        android:textSize="16dp" />
+
+    <!--    <com.google.android.material.chip.ChipGroup-->
+    <!--        android:id="@+id/chipGROUP"-->
+    <!--        android:layout_width="match_parent"-->
+    <!--        android:visibility="gone"-->
+    <!--        android:layout_height="80dp"-->
+    <!--        android:layout_below="@id/headline2"-->
+    <!--        android:layout_marginStart="10dp"-->
+    <!--        android:layout_marginTop="10dp"-->
+    <!--        android:layout_marginEnd="10dp">-->
+
+    <!--        <com.google.android.material.chip.Chip-->
+    <!--            android:id="@+id/optionAChip"-->
+    <!--            android:layout_width="wrap_content"-->
+    <!--            android:layout_height="wrap_content"-->
+    <!--            android:layout_margin="10dp"-->
+    <!--            android:backgroundTint="@color/purple_700"-->
+    <!--            android:text="Option A"-->
+    <!--            android:textColor="@color/white" />-->
+
+    <!--        <com.google.android.material.chip.Chip-->
+    <!--            android:id="@+id/optionBChip"-->
+    <!--            android:layout_width="wrap_content"-->
+    <!--            android:layout_height="wrap_content"-->
+    <!--            android:layout_margin="10dp"-->
+    <!--            android:backgroundTint="@color/purple_700"-->
+    <!--            android:text="Option B"-->
+    <!--            android:textColor="@color/white" />-->
+
+
+    <!--    </com.google.android.material.chip.ChipGroup>-->
+
+    <RadioGroup
+        android:id="@+id/tfradioGroup"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/headline2"
+        android:layout_margin="10dp">
+
+        <RadioButton
+            android:id="@+id/optionARadio"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:buttonTint="@color/purple_700"
+            android:text="Option A"
+            android:textSize="16dp" />
+
+        <RadioButton
+            android:id="@+id/optionBRadio"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:buttonTint="@color/purple_700"
+            android:text="Option B"
+            android:textSize="16dp" />
+
+
+    </RadioGroup>
+
+    <Button
+        android:id="@+id/pushBTN"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:layout_below="@+id/tfradioGroup"
+        android:layout_margin="10dp"
+        android:backgroundTint="@color/purple_700"
+        android:text="PUSH" />
+
+
+</RelativeLayout>

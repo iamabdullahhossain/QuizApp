@@ -1,0 +1,189 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".View.student.StudentRegistrationActivity">
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/purple_700"
+        app:navigationIcon="@drawable/ic_action_back"
+        app:title="Student Registration"
+        app:titleTextColor="@color/white" />
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/toolbar"
+        android:fillViewport="true">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+
+            <TextView
+                android:id="@+id/nameTV"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:text="Name"
+                android:textColor="@color/black"
+                android:textSize="16dp" />
+
+            <EditText
+                android:id="@+id/nameET"
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:layout_below="@id/nameTV"
+                android:paddingStart="10dp"
+                android:layout_marginStart="10dp"
+                android:layout_marginEnd="10dp"
+                android:background="@drawable/custom_edit_text" />
+
+            <TextView
+                android:id="@+id/batchTV"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/nameET"
+                android:layout_margin="10dp"
+                android:text="Batch"
+                android:textColor="@color/black"
+                android:textSize="16dp" />
+
+            <EditText
+                android:id="@+id/batchET"
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:layout_below="@id/batchTV"
+                android:paddingStart="10dp"
+                android:layout_marginStart="10dp"
+                android:layout_marginEnd="10dp"
+                android:background="@drawable/custom_edit_text" />
+
+            <TextView
+                android:id="@+id/idTV"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/batchET"
+                android:layout_margin="10dp"
+                android:text="Batch ID"
+                android:textColor="@color/black"
+                android:textSize="16dp" />
+
+            <EditText
+                android:id="@+id/idET"
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:layout_below="@id/idTV"
+                android:paddingStart="10dp"
+                android:layout_marginStart="10dp"
+                android:layout_marginEnd="10dp"
+                android:background="@drawable/custom_edit_text" />
+
+            <TextView
+                android:id="@+id/emailTV"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/idET"
+                android:layout_margin="10dp"
+                android:text="Email"
+                android:textColor="@color/black"
+                android:textSize="16dp" />
+
+            <EditText
+                android:id="@+id/emailET"
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:layout_below="@id/emailTV"
+                android:paddingStart="10dp"
+                android:layout_marginStart="10dp"
+                android:layout_marginEnd="10dp"
+                android:background="@drawable/custom_edit_text" />
+
+
+            <TextView
+                android:id="@+id/phoneTV"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/emailET"
+                android:layout_margin="10dp"
+                android:text="Phone"
+                android:textColor="@color/black"
+                android:textSize="16dp" />
+
+
+            <EditText
+                android:id="@+id/phoneET"
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:layout_below="@id/phoneTV"
+                android:paddingStart="10dp"
+                android:layout_marginStart="10dp"
+                android:layout_marginEnd="10dp"
+                android:background="@drawable/custom_edit_text" />
+
+            <TextView
+                android:id="@+id/passwordTV"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/phoneET"
+                android:layout_margin="10dp"
+                android:text="Password"
+                android:textColor="@color/black"
+                android:textSize="16dp" />
+
+
+            <EditText
+                android:id="@+id/passwordET"
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:layout_below="@id/passwordTV"
+                android:paddingStart="10dp"
+                android:layout_marginStart="10dp"
+                android:layout_marginEnd="10dp"
+                android:background="@drawable/custom_edit_text" />
+
+
+            <TextView
+                android:id="@+id/confirmPasswordTV"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/passwordET"
+                android:layout_margin="10dp"
+                android:text="Confirm Password"
+                android:textColor="@color/black"
+                android:textSize="16dp" />
+
+            <EditText
+                android:id="@+id/confirmPasswordET"
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:paddingStart="10dp"
+                android:layout_below="@id/confirmPasswordTV"
+                android:layout_marginStart="10dp"
+                android:layout_marginEnd="10dp"
+                android:background="@drawable/custom_edit_text" />
+
+            <Button
+                android:id="@+id/confirmBTN"
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:layout_below="@id/confirmPasswordET"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="50dp"
+                android:layout_marginEnd="20dp"
+                android:text="Confirm Registration" />
+
+
+        </RelativeLayout>
+
+    </ScrollView>
+
+
+
+</RelativeLayout>

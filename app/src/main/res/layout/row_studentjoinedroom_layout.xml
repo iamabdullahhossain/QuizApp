@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/roomCard"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        app:cardElevation="5dp">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:id="@+id/roomNameTV"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="10dp"
+                android:layout_toLeftOf="@id/statusTV"
+                android:layout_alignParentStart="true"
+                android:textColor="@color/purple_700"
+                android:textSize="16dp"
+                tools:text="Room name" />
+
+            <TextView
+                android:id="@+id/descriptionTV"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/roomNameTV"
+                android:layout_toLeftOf="@id/statusTV"
+                android:layout_alignParentStart="true"
+                android:layout_marginStart="10dp"
+                android:textColor="@color/black"
+                tools:text="Details" />
+
+            <TextView
+                android:id="@+id/assignedTV"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/descriptionTV"
+                android:layout_toLeftOf="@id/statusTV"
+                android:layout_alignParentStart="true"
+                android:layout_marginBottom="10dp"
+                android:layout_marginStart="10dp"
+                android:textColor="@color/black"
+                tools:text="Assigned By: Epon Forhad" />
+
+            <TextView
+                android:id="@+id/statusTV"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_centerVertical="true"
+                android:layout_margin="10dp"
+                android:background="@drawable/custom_edit_text"
+                android:padding="10dp"
+                android:textColor="@color/purple_700"
+                tools:text="JOINED" />
+
+
+
+
+
+
+
+        </RelativeLayout>
+    </androidx.cardview.widget.CardView>
+
+</RelativeLayout>

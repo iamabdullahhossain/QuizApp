@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <TextView
+        android:id="@+id/headline"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="20dp"
+        android:text="Search Room"
+        android:textColor="@color/purple_700"
+        android:textSize="16dp"
+        android:textStyle="bold" />
+
+    <EditText
+        android:id="@+id/codeET"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:layout_below="@id/headline"
+        android:layout_margin="20dp"
+        android:background="@drawable/custom_edit_text"
+        android:hint="Enter preferred room code"
+        android:padding="10dp" />
+
+
+    <Button
+        android:id="@+id/doneBTN"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:layout_below="@id/codeET"
+        android:layout_marginStart="50dp"
+        android:layout_marginEnd="50dp"
+        android:layout_marginBottom="20dp"
+        android:backgroundTint="@color/purple_700"
+        android:text="SEARCH" />
+
+
+</RelativeLayout>
