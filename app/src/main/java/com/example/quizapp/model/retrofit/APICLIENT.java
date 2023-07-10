@@ -4,6 +4,7 @@ package com.example.quizapp.model.retrofit;
 import com.example.quizapp.model.student.StudentInformationModel;
 import com.example.quizapp.model.student.StudentJoinedRoomModel;
 import com.example.quizapp.model.student.StudentQuestionModel;
+import com.example.quizapp.model.teacher.StudentAcceptedListModel;
 import com.example.quizapp.model.teacher.StudentRequestCountModel;
 import com.example.quizapp.model.teacher.StudentRequestModel;
 import com.example.quizapp.model.teacher.TeacherFetchQuestionModel;
@@ -206,6 +207,30 @@ public interface APICLIENT {
 
     @GET("student/s_fetchquestions.php")
     Call<List<StudentQuestionModel>> question(
+            @Query("r_code") String r_code
+    );
+
+    @FormUrlEncoded
+    @POST("student/s_answer.php")
+    Call<PostRetrofitModel> answer(
+            @Field("s_name") String s_name,
+            @Field("s_id") String s_id,
+            @Field("s_uniquecode") String s_uniquecode,
+            @Field("s_batch") String s_batch,
+            @Field("t_name") String t_name,
+            @Field("t_uniquecode") String t_uniquecode,
+            @Field("r_code") String r_code,
+            @Field("r_name") String r_name,
+            @Field("q_question") String q_question,
+            @Field("q_id") String q_id,
+            @Field("q_answer") String q_answer,
+            @Field("s_answer") String s_answer,
+            @Field("q_marks") String q_marks
+
+    );
+
+    @GET("teacher/t_fetchjoinedstudents.php")
+    Call<List<StudentAcceptedListModel>> accepted(
             @Query("r_code") String r_code
     );
 

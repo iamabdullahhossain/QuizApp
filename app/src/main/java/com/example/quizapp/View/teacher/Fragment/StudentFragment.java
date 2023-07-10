@@ -31,6 +31,7 @@ public class StudentFragment extends Fragment {
         controller = new StudentFragmentController();
 
         controller.getRequestCount(model.getrCode(), binding.waitingTV);
+        controller.getAcceptedStudents(model.getrCode(), binding.recyclerView, binding.getRoot().getContext());
 
         binding.card1.setOnClickListener(view -> {
             Intent intent = new Intent(binding.getRoot().getContext(), TeacherAcceptRequestActivity.class);

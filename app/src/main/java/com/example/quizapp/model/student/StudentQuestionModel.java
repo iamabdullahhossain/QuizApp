@@ -8,7 +8,6 @@ import java.io.Serializable;
 public class StudentQuestionModel implements Serializable {
 
 
-
     @SerializedName("id")
     @Expose
     private String id;
@@ -42,6 +41,11 @@ public class StudentQuestionModel implements Serializable {
     @SerializedName("q_ans")
     @Expose
     private String qAns;
+
+    @SerializedName("s_answer")
+    @Expose
+    private String s_answer;
+
     @SerializedName("q_marks")
     @Expose
     private String qMarks;
@@ -138,6 +142,14 @@ public class StudentQuestionModel implements Serializable {
 
     public void setqAns(String qAns) {
         this.qAns = qAns;
+    }
+
+    public String getS_answer() {
+        return s_answer;
+    }
+
+    public void setS_answer(String s_answer) {
+        this.s_answer = s_answer;
     }
 
     public String getqMarks() {

@@ -1,5 +1,6 @@
 package com.example.quizapp.Controller.StudentAdapter;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -37,7 +38,7 @@ public class StudentQuestionAdapter extends RecyclerView.Adapter<StudentQuestion
     }
 
     @Override
-    public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull ViewHolder holder, @SuppressLint("RecyclerView") int position) {
 
         StudentQuestionModel model = list.get(position);
 
@@ -65,7 +66,7 @@ public class StudentQuestionAdapter extends RecyclerView.Adapter<StudentQuestion
 
                     }else {
                         RadioButton radioButton = holder.binding.radioGroup.findViewById(selectedID);
-                        examInterface.getAnswer(radioButton.getText().toString(),model);
+                        examInterface.getAnswer(radioButton.getText().toString(),model, list, position);
                     }
 
 
@@ -101,7 +102,7 @@ public class StudentQuestionAdapter extends RecyclerView.Adapter<StudentQuestion
 
                     }else {
                         RadioButton radioButton = holder.binding.radioGroup.findViewById(selectedID);
-                        examInterface.getAnswer(radioButton.getText().toString(), model);
+                        examInterface.getAnswer(radioButton.getText().toString(), model, list, position);
                     }
 
 
@@ -137,7 +138,7 @@ public class StudentQuestionAdapter extends RecyclerView.Adapter<StudentQuestion
                 @Override
                 public void afterTextChanged(Editable editable) {
 
-                    examInterface.getAnswer(editable+"", model);
+                    examInterface.getAnswer(editable+"", model, list, position);
                 }
             });
 
@@ -170,8 +171,7 @@ public class StudentQuestionAdapter extends RecyclerView.Adapter<StudentQuestion
 
     public interface ExamInterface{
 
-        void onClick(StudentQuestionModel model);
-        void getAnswer(String answer, StudentQuestionModel model);
+        void getAnswer(String answer, StudentQuestionModel model, List<StudentQuestionModel> list, int position);
 
     }
 }
