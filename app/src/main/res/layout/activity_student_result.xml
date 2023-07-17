@@ -12,7 +12,7 @@
         android:layout_height="wrap_content"
         android:background="@color/purple_700"
         app:navigationIcon="@drawable/ic_action_back"
-        app:title="Result"
+        app:title="Check Result"
         app:titleTextColor="@color/white" />
 
     <androidx.cardview.widget.CardView

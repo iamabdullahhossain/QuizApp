@@ -53,13 +53,13 @@ public class TeacherAcceptRequestController {
                         }
 
                         @Override
-                        public void removeItem(List<StudentRequestModel> list, int position) {
-                            adapter.notifyItemRemoved(position);
-                            list.remove(position);
-                            if (list.size()<1){
+                        public void removeItem(List<StudentRequestModel> list, int position, TeacherAcceptRequestAdapter.ViewHolder holder) {
+                            list.remove(holder.getAdapterPosition());
+                            adapter.notifyItemRemoved(holder.getAdapterPosition());
+
+                            if (list.size() < 1) {
                                 noReqTV.setVisibility(View.VISIBLE);
                             }
-
                         }
 
 

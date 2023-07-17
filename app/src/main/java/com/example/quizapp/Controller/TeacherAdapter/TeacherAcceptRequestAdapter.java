@@ -40,7 +40,7 @@ public class TeacherAcceptRequestAdapter extends RecyclerView.Adapter<TeacherAcc
 
         holder.binding.acceptBTN.setOnClickListener(view -> {
             click.itemClick(model);
-            click.removeItem(list, position);
+            click.removeItem(list, position, holder);
         });
 
 
@@ -51,7 +51,7 @@ public class TeacherAcceptRequestAdapter extends RecyclerView.Adapter<TeacherAcc
         return list.size();
     }
 
-    class ViewHolder extends RecyclerView.ViewHolder {
+    public class ViewHolder extends RecyclerView.ViewHolder {
 
         RowAcceptrequestLayoutBinding binding;
 
@@ -64,6 +64,6 @@ public class TeacherAcceptRequestAdapter extends RecyclerView.Adapter<TeacherAcc
     public interface onClick {
         void itemClick(StudentRequestModel model);
 
-        void removeItem(List<StudentRequestModel> list, int position);
+        void removeItem(List<StudentRequestModel> list, int position, ViewHolder holder);
     }
 }

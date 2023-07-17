@@ -2,6 +2,7 @@ package com.example.quizapp.Controller.TeacherAdapter;
 
 import android.content.Context;
 import android.view.LayoutInflater;
+import android.view.View;
 import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
@@ -9,6 +10,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.quizapp.databinding.RowCheckresultLayoutBinding;
 import com.example.quizapp.model.teacher.StudentAnswerSheetModel;
+import com.example.quizapp.model.teacher.StudentRequestModel;
 
 import java.util.List;
 
@@ -36,12 +38,21 @@ public class StudentAnswerSheetAdapter extends RecyclerView.Adapter<StudentAnswe
 
         holder.binding.questionTV.setText("Q. " + model.getqQuestion());
         holder.binding.studentAnswerTV.setText("Written answer: " + model.getsAnswer());
-        holder.binding.questionTV.setText("Correct Answer: " + model.getqQuestion());
+
+        if (model.getqAnswer().equals("")){
+            holder.binding.correctAnswerTV.setVisibility(View.GONE);
+        }else {
+            holder.binding.correctAnswerTV.setText("Correct Answer: " + model.getqAnswer());
+        }
         holder.binding.acceptBTN.setOnClickListener(view -> {
-            checkAnswer.check(model);
+            checkAnswer.removeItem(list, position, holder);
+            checkAnswer.accept(model);
+
         });
         holder.binding.rejectBTN.setOnClickListener(view -> {
-            checkAnswer.check(model);
+            checkAnswer.removeItem(list, position, holder);
+            checkAnswer.decline(model);
+
         });
 
 
@@ -52,7 +63,7 @@ public class StudentAnswerSheetAdapter extends RecyclerView.Adapter<StudentAnswe
         return list.size();
     }
 
-    class ViewHolder extends RecyclerView.ViewHolder {
+    public class ViewHolder extends RecyclerView.ViewHolder {
         RowCheckresultLayoutBinding binding;
 
         public ViewHolder(@NonNull RowCheckresultLayoutBinding binding) {
@@ -62,7 +73,10 @@ public class StudentAnswerSheetAdapter extends RecyclerView.Adapter<StudentAnswe
     }
 
     public interface checkAnswer {
-        void check(StudentAnswerSheetModel model);
+        void accept(StudentAnswerSheetModel model);
+        void decline(StudentAnswerSheetModel model);
+
+        void removeItem(List<StudentAnswerSheetModel> list, int position, ViewHolder holder);
     }
 
 

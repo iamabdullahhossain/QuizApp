@@ -1,12 +1,14 @@
 package com.example.quizapp.Controller.teacher;
 
 import android.content.Context;
+import android.content.Intent;
 import android.widget.TextView;
 
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.quizapp.Controller.TeacherAdapter.StudentAcceptedListAdapter;
+import com.example.quizapp.View.teacher.StudentResultActivity;
 import com.example.quizapp.model.retrofit.APICONTROLLER;
 import com.example.quizapp.model.teacher.StudentAcceptedListModel;
 import com.example.quizapp.model.teacher.StudentRequestCountModel;
@@ -46,6 +48,9 @@ public class StudentFragmentController {
                     @Override
                     public void onClick(StudentAcceptedListModel model) {
 
+                        Intent intent = new Intent(context, StudentResultActivity.class);
+                        intent.putExtra("model", model);
+                        context.startActivity(intent);
 
                     }
 

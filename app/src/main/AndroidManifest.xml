@@ -17,7 +17,13 @@
         android:usesCleartextTraffic="true"
         tools:targetApi="31">
         <activity
-            android:name=".StudentResultActivity"
+            android:name=".View.student.StudentSubmitActivity"
+            android:exported="false" />
+        <activity
+            android:name=".View.teacher.TeacherCheckResultActivity"
+            android:exported="false" />
+        <activity
+            android:name=".View.teacher.StudentResultActivity"
             android:exported="false" />
         <activity
             android:name=".View.student.StudentExamRoomActivity"

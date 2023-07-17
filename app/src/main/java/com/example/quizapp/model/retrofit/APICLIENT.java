@@ -5,10 +5,12 @@ import com.example.quizapp.model.student.StudentInformationModel;
 import com.example.quizapp.model.student.StudentJoinedRoomModel;
 import com.example.quizapp.model.student.StudentQuestionModel;
 import com.example.quizapp.model.teacher.StudentAcceptedListModel;
+import com.example.quizapp.model.teacher.StudentAnswerSheetModel;
 import com.example.quizapp.model.teacher.StudentRequestCountModel;
 import com.example.quizapp.model.teacher.StudentRequestModel;
 import com.example.quizapp.model.teacher.TeacherFetchQuestionModel;
 import com.example.quizapp.model.teacher.TeacherInformationModel;
+import com.example.quizapp.model.teacher.TeacherResultBoradModel;
 import com.example.quizapp.model.teacher.TeacherRoomFetchModel;
 
 import java.util.List;
@@ -232,6 +234,26 @@ public interface APICLIENT {
     @GET("teacher/t_fetchjoinedstudents.php")
     Call<List<StudentAcceptedListModel>> accepted(
             @Query("r_code") String r_code
+    );
+
+    @GET("teacher/t_answersheet.php")
+    Call<List<StudentAnswerSheetModel>> answersheet(
+            @Query("r_code") String r_code,
+            @Query("s_id") String s_id
+    );
+
+    @FormUrlEncoded
+    @POST("teacher/t_answercheck.php")
+    Call<PostRetrofitModel> check(
+            @Query("q_id") String q_id,
+            @Query("s_id") String s_id,
+            @Field("t_marking") String t_marking
+    );
+
+    @GET("teacher/t_resultboard.php")
+    Call<List<TeacherResultBoradModel>> result(
+            @Query("r_code") String r_code,
+            @Query("s_id") String s_id
     );
 
 

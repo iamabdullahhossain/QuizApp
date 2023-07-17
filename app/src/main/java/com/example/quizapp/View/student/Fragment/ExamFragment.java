@@ -1,5 +1,6 @@
 package com.example.quizapp.View.student.Fragment;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -8,6 +9,7 @@ import android.view.ViewGroup;
 import androidx.fragment.app.Fragment;
 
 import com.example.quizapp.Controller.student.ExamFragmentController;
+import com.example.quizapp.View.student.StudentSubmitActivity;
 import com.example.quizapp.databinding.FragmentExamBinding;
 import com.example.quizapp.model.student.StudentJoinedRoomModel;
 import com.example.quizapp.model.student.StudentQuestionModel;
@@ -46,7 +48,8 @@ public class ExamFragment extends Fragment {
             }.getType();
             list = new Gson().fromJson(controller.GetList(), type);
 
-            controller.submitAnswer(binding.getRoot().getContext(), list, model);
+            controller.submitAnswer(binding.getRoot().getContext(), list, model, binding.submitBTN);
+
 
         });
 

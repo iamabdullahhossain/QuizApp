@@ -1,15 +1,16 @@
 package com.example.quizapp.Controller.student;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.quizapp.Controller.StudentAdapter.StudentQuestionAdapter;
+import com.example.quizapp.View.student.StudentSubmitActivity;
 import com.example.quizapp.model.retrofit.APICONTROLLER;
 import com.example.quizapp.model.retrofit.PostRetrofitModel;
 import com.example.quizapp.model.student.StudentJoinedRoomModel;
@@ -70,24 +71,11 @@ public class ExamFragmentController implements StudentQuestionAdapter.ExamInterf
 
     }
 
-    public void submitAnswer(Context context, List<StudentQuestionModel> studentQuestionModelList, StudentJoinedRoomModel model) {
+    public void submitAnswer(Context context, List<StudentQuestionModel> studentQuestionModelList, StudentJoinedRoomModel model, Button button) {
         for (int i = 0; i < studentQuestionModelList.size(); i++) {
-            Call<PostRetrofitModel> answer = APICONTROLLER.getInstance().getAPI().answer(
-                    model.getsName(),
-                    model.getsId(),
-                    model.getsUniquecode(),
-                    model.getrBatch(),
-                    studentQuestionModelList.get(i).gettName(),
-                    studentQuestionModelList.get(i).gettUniquecode(),
-                    studentQuestionModelList.get(i).getrCode(),
-                    model.getrName(),
-                    studentQuestionModelList.get(i).getqQuestion(),
-                    studentQuestionModelList.get(i).getId(),
-                    studentQuestionModelList.get(i).getqAns(),
-                    studentQuestionModelList.get(i).getS_answer(),
-                    studentQuestionModelList.get(i).getqMarks()
+            Call<PostRetrofitModel> answer = APICONTROLLER.getInstance().getAPI().answer(model.getsName(), model.getsId(), model.getsUniquecode(), model.getrBatch(), studentQuestionModelList.get(i).gettName(), studentQuestionModelList.get(i).gettUniquecode(), studentQuestionModelList.get(i).getrCode(), model.getrName(), studentQuestionModelList.get(i).getqQuestion(), studentQuestionModelList.get(i).getId(), studentQuestionModelList.get(i).getqAns(), studentQuestionModelList.get(i).getS_answer(), studentQuestionModelList.get(i).getqMarks()
 
-                    );
+            );
             answer.enqueue(new Callback<PostRetrofitModel>() {
                 @Override
                 public void onResponse(Call<PostRetrofitModel> call, Response<PostRetrofitModel> response) {
@@ -100,6 +88,9 @@ public class ExamFragmentController implements StudentQuestionAdapter.ExamInterf
                 }
             });
         }
+
+        button.setVisibility(View.GONE);
+        context.startActivity(new Intent(context, StudentSubmitActivity.class));
 
 
     }
