@@ -10,6 +10,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.quizapp.Controller.StudentAdapter.StudentQuestionAdapter;
+import com.example.quizapp.View.student.Fragment.ExamFragment;
 import com.example.quizapp.View.student.StudentSubmitActivity;
 import com.example.quizapp.model.retrofit.APICONTROLLER;
 import com.example.quizapp.model.retrofit.PostRetrofitModel;
@@ -28,42 +29,63 @@ public class ExamFragmentController implements StudentQuestionAdapter.ExamInterf
     List<StudentQuestionModel> studentQuestionModelList;
 
 
-    public void showQuestions(RecyclerView recyclerView, Context context, String r_code, TextView noExamTV, Button submitBTN) {
+    public void showQuestions(RecyclerView recyclerView, Context context, String r_code, TextView noExamTV, Button submitBTN, String s_id) {
 
-        recyclerView.setLayoutManager(new LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false));
-        recyclerView.setHasFixedSize(false);
 
-        Call<List<StudentQuestionModel>> question = APICONTROLLER.getInstance().getAPI().question(r_code);
-        question.enqueue(new Callback<List<StudentQuestionModel>>() {
+        Call<PostRetrofitModel> check = APICONTROLLER.getInstance().getAPI().checkAttempt(s_id, r_code);
+        check.enqueue(new Callback<PostRetrofitModel>() {
             @Override
-            public void onResponse(Call<List<StudentQuestionModel>> call, Response<List<StudentQuestionModel>> response) {
-                studentQuestionModelList = response.body();
+            public void onResponse(Call<PostRetrofitModel> call, Response<PostRetrofitModel> response) {
+                if (response.body().getReply().equals("100")){
 
+                    noExamTV.setVisibility(View.VISIBLE);
+                    noExamTV.setText("You have already attempted this exam!");
 
-                if (response.body().size() > 0) {
-                    noExamTV.setVisibility(View.GONE);
-                    StudentQuestionAdapter adapter = new StudentQuestionAdapter(context, response.body(), new StudentQuestionAdapter.ExamInterface() {
+                }else {
 
+                    recyclerView.setLayoutManager(new LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false));
+                    recyclerView.setHasFixedSize(false);
+
+                    Call<List<StudentQuestionModel>> question = APICONTROLLER.getInstance().getAPI().question(r_code);
+                    question.enqueue(new Callback<List<StudentQuestionModel>>() {
                         @Override
-                        public void getAnswer(String answer, StudentQuestionModel model, List<StudentQuestionModel> list, int position) {
-                            model.setS_answer(answer);
+                        public void onResponse(Call<List<StudentQuestionModel>> call, Response<List<StudentQuestionModel>> response) {
+                            studentQuestionModelList = response.body();
+
+
+                            if (response.body().size() > 0) {
+                                noExamTV.setVisibility(View.GONE);
+                                StudentQuestionAdapter adapter = new StudentQuestionAdapter(context, response.body(), new StudentQuestionAdapter.ExamInterface() {
+
+                                    @Override
+                                    public void getAnswer(String answer, StudentQuestionModel model, List<StudentQuestionModel> list, int position) {
+                                        model.setS_answer(answer);
+                                    }
+
+
+                                });
+
+                                recyclerView.setAdapter(adapter);
+                            } else {
+                                noExamTV.setVisibility(View.VISIBLE);
+                                submitBTN.setVisibility(View.GONE);
+
+                            }
+
+
                         }
 
+                        @Override
+                        public void onFailure(Call<List<StudentQuestionModel>> call, Throwable t) {
 
+                        }
                     });
 
-                    recyclerView.setAdapter(adapter);
-                } else {
-                    noExamTV.setVisibility(View.VISIBLE);
-                    submitBTN.setVisibility(View.GONE);
-
                 }
-
-
             }
 
             @Override
-            public void onFailure(Call<List<StudentQuestionModel>> call, Throwable t) {
+            public void onFailure(Call<PostRetrofitModel> call, Throwable t) {
 
             }
         });
@@ -71,7 +93,10 @@ public class ExamFragmentController implements StudentQuestionAdapter.ExamInterf
 
     }
 
-    public void submitAnswer(Context context, List<StudentQuestionModel> studentQuestionModelList, StudentJoinedRoomModel model, Button button) {
+    public void submitAnswer(Context context, List<StudentQuestionModel> studentQuestionModelList, StudentJoinedRoomModel model, Button button, ExamFragment fragment) {
+
+         attempted(model);
+
         for (int i = 0; i < studentQuestionModelList.size(); i++) {
             Call<PostRetrofitModel> answer = APICONTROLLER.getInstance().getAPI().answer(model.getsName(), model.getsId(), model.getsUniquecode(), model.getrBatch(), studentQuestionModelList.get(i).gettName(), studentQuestionModelList.get(i).gettUniquecode(), studentQuestionModelList.get(i).getrCode(), model.getrName(), studentQuestionModelList.get(i).getqQuestion(), studentQuestionModelList.get(i).getId(), studentQuestionModelList.get(i).getqAns(), studentQuestionModelList.get(i).getS_answer(), studentQuestionModelList.get(i).getqMarks()
 
@@ -91,6 +116,31 @@ public class ExamFragmentController implements StudentQuestionAdapter.ExamInterf
 
         button.setVisibility(View.GONE);
         context.startActivity(new Intent(context, StudentSubmitActivity.class));
+        fragment.getActivity().finish();
+
+
+
+    }
+
+    private void attempted(StudentJoinedRoomModel model) {
+
+        Call<PostRetrofitModel> attempt = APICONTROLLER.getInstance().getAPI().attend(
+                model.getsId(),
+                model.getrCode(),
+                model.getrBatch()
+        );
+
+        attempt.enqueue(new Callback<PostRetrofitModel>() {
+            @Override
+            public void onResponse(Call<PostRetrofitModel> call, Response<PostRetrofitModel> response) {
+
+            }
+
+            @Override
+            public void onFailure(Call<PostRetrofitModel> call, Throwable t) {
+
+            }
+        });
 
 
     }

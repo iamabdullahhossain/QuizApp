@@ -256,5 +256,19 @@ public interface APICLIENT {
             @Query("s_id") String s_id
     );
 
+    @FormUrlEncoded
+    @POST("student/s_attempt.php")
+    Call<PostRetrofitModel> attend(
+            @Field("s_id") String s_id,
+            @Field("r_code") String r_code,
+            @Field("s_batch") String s_batch
+    );
+
+    @GET("student/s_checkAttempt.php")
+    Call<PostRetrofitModel> checkAttempt(
+            @Query("s_id") String s_id,
+            @Query("r_code") String r_code
+    );
+
 
 }

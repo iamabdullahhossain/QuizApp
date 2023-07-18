@@ -40,7 +40,7 @@ public class ExamFragment extends Fragment {
         binding = FragmentExamBinding.inflate(getLayoutInflater());
 
         controller = new ExamFragmentController();
-        controller.showQuestions(binding.recyclerView, binding.getRoot().getContext(), model.getrCode(), binding.notStartTV, binding.submitBTN);
+        controller.showQuestions(binding.recyclerView, binding.getRoot().getContext(), model.getrCode(), binding.notStartTV, binding.submitBTN, model.getsId());
 
         binding.submitBTN.setOnClickListener(view -> {
 
@@ -48,7 +48,7 @@ public class ExamFragment extends Fragment {
             }.getType();
             list = new Gson().fromJson(controller.GetList(), type);
 
-            controller.submitAnswer(binding.getRoot().getContext(), list, model, binding.submitBTN);
+            controller.submitAnswer(binding.getRoot().getContext(), list, model, binding.submitBTN, this);
 
 
         });
@@ -56,4 +56,6 @@ public class ExamFragment extends Fragment {
 
         return binding.getRoot();
     }
+
+
 }
