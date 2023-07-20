@@ -76,7 +76,7 @@ public class TeacherLoginController {
 
     }
 
-    public void getInformation(String phone, Context context){
+    /*public void getInformation(String phone, Context context){
 
         Call<List<TeacherInformationModel>> t_information = APICONTROLLER.getInstance().getAPI().t_information(phone);
         t_information.enqueue(new Callback<List<TeacherInformationModel>>() {
@@ -94,6 +94,6 @@ public class TeacherLoginController {
             }
         });
 
-    }
+    }*/
 
 }

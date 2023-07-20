@@ -25,6 +25,9 @@ public class MainActivity extends AppCompatActivity {
         binding.studentBTN.setOnClickListener(view -> {
             startActivity(new Intent(MainActivity.this, StudentLoginActivity.class));
         });
+
+
+
     }
 }
 

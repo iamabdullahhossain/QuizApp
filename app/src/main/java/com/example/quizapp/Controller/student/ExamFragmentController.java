@@ -40,6 +40,7 @@ public class ExamFragmentController implements StudentQuestionAdapter.ExamInterf
 
                     noExamTV.setVisibility(View.VISIBLE);
                     noExamTV.setText("You have already attempted this exam!");
+                    submitBTN.setVisibility(View.GONE);
 
                 }else {
 
@@ -55,6 +56,7 @@ public class ExamFragmentController implements StudentQuestionAdapter.ExamInterf
 
                             if (response.body().size() > 0) {
                                 noExamTV.setVisibility(View.GONE);
+                                submitBTN.setVisibility(View.VISIBLE);
                                 StudentQuestionAdapter adapter = new StudentQuestionAdapter(context, response.body(), new StudentQuestionAdapter.ExamInterface() {
 
                                     @Override
