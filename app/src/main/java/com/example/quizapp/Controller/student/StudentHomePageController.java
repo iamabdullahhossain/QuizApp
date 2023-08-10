@@ -178,7 +178,8 @@ public class StudentHomePageController {
 
                 @Override
                 public void onFailure(Call<PostRetrofitModel> call, Throwable t) {
-                    Toast.makeText(context, "Check your internet connection", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(context, "Joining Request Sent!", Toast.LENGTH_SHORT).show();
+                    dialog.dismiss();
                 }
             });
 

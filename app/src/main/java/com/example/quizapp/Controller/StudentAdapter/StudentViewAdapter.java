@@ -8,6 +8,7 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentPagerAdapter;
 
 import com.example.quizapp.View.student.Fragment.ExamFragment;
+import com.example.quizapp.View.student.Fragment.ExamFragmentTwo;
 import com.example.quizapp.View.student.Fragment.ResultFragment;
 import com.example.quizapp.model.student.StudentJoinedRoomModel;
 
@@ -31,7 +32,8 @@ public class StudentViewAdapter extends FragmentPagerAdapter {
 
         switch (position) {
             case 0:
-                ExamFragment examFragment = new ExamFragment(model);
+              //  ExamFragment examFragment = new ExamFragment(model);
+                ExamFragmentTwo examFragment = new ExamFragmentTwo(model);
                 return examFragment;
             case 1:
                 ResultFragment resultFragment = new ResultFragment(model);
