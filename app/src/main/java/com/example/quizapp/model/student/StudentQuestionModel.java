@@ -176,4 +176,24 @@ public class StudentQuestionModel implements Serializable {
         this.active = active;
     }
 
+    @Override
+    public String toString() {
+        return "StudentQuestionModel{" +
+                "id='" + id + '\'' +
+                ", tName='" + tName + '\'' +
+                ", tUniquecode='" + tUniquecode + '\'' +
+                ", qQuestion='" + qQuestion + '\'' +
+                ", qType='" + qType + '\'' +
+                ", qA='" + qA + '\'' +
+                ", qB='" + qB + '\'' +
+                ", qC='" + qC + '\'' +
+                ", qD='" + qD + '\'' +
+                ", qShort=" + qShort +
+                ", qAns='" + qAns + '\'' +
+                ", s_answer='" + s_answer + '\'' +
+                ", qMarks='" + qMarks + '\'' +
+                ", rCode='" + rCode + '\'' +
+                ", active='" + active + '\'' +
+                '}';
+    }
 }

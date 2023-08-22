@@ -5,7 +5,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 
 public class APICONTROLLER {
-    private static final String BASE_URL = "http://192.168.0.206/mcqapp/";
+    private static final String BASE_URL = "https://mcq.mudirdokan.xyz/";
 
     private static APICONTROLLER apicontroller;
     private static Retrofit retrofit;

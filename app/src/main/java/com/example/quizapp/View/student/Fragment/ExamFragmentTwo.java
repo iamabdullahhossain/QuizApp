@@ -8,6 +8,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.example.quizapp.Controller.student.ExamFragmentController;
 import com.example.quizapp.R;
 import com.example.quizapp.databinding.FragmentExamTwoBinding;
 import com.example.quizapp.model.student.StudentJoinedRoomModel;
@@ -16,6 +17,8 @@ public class ExamFragmentTwo extends Fragment {
     FragmentExamTwoBinding binding;
 
     StudentJoinedRoomModel model;
+    ExamFragmentController controller;
+    int number = 0;
 
     public ExamFragmentTwo(StudentJoinedRoomModel model) {
         this.model = model;
@@ -26,9 +29,26 @@ public class ExamFragmentTwo extends Fragment {
                              Bundle savedInstanceState) {
         binding = FragmentExamTwoBinding.inflate(getLayoutInflater());
 
+        controller = new ExamFragmentController();
+        controller.showSeparateQuestions(binding.getRoot().getContext(),
+                model.getrCode(),
+                model.getsId(),
+                binding.notStartTV,
+                number,
+                binding);
 
-
-
+        number++;
+        binding.nextBTN.setOnClickListener(view -> {
+            /*controller.nextBTN(number,
+                    binding.getRoot().getContext(),
+                    model.getrCode(),
+                    model.getsId(),
+                    binding.notStartTV,
+                    number,
+                    binding);*/
+            controller.nextQuestion(binding);
+            number++;
+        });
 
 
 
