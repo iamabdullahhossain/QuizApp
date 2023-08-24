@@ -36,6 +36,7 @@ public class ExamFragmentController implements StudentQuestionAdapter.ExamInterf
 
     List<StudentQuestionModel> studentQuestionModelList;
     int index = 0;
+    String answer = null;
     private static final String TAG = "ExamFragmentController";
 
 
@@ -257,6 +258,7 @@ public class ExamFragmentController implements StudentQuestionAdapter.ExamInterf
     }
 
     private void setQuestion(int _index, FragmentExamTwoBinding binding) {
+
         binding.questionCard.setVisibility(View.VISIBLE);
         binding.nextBTN.setVisibility(View.VISIBLE);
 
@@ -412,10 +414,17 @@ public class ExamFragmentController implements StudentQuestionAdapter.ExamInterf
         }
     }
 
-    public void nextQuestion(FragmentExamTwoBinding binding) {
+    public void nextQuestion(FragmentExamTwoBinding binding, StudentJoinedRoomModel model) {
         index++;
         setQuestion(index, binding);
+
     }
+
+    public void submitAnswer(FragmentExamTwoBinding binding, String answer, StudentJoinedRoomModel model){
+
+    }
+
+
 
 
 }

@@ -38,7 +38,8 @@ public class ExamFragmentTwo extends Fragment {
 
         number++;
         binding.nextBTN.setOnClickListener(view -> {
-            controller.nextQuestion(binding);
+            controller.nextQuestion(binding, model);
+
             number++;
         });
 
