@@ -24,11 +24,12 @@
         android:layout_centerInParent="true"
         android:text="Exam is not started yet!"
         android:textSize="16dp"
-        android:visibility="gone" />
+        android:visibility="visible" />
 
     <androidx.cardview.widget.CardView
         android:id="@+id/questionCard"
         android:layout_width="match_parent"
+        android:visibility="gone"
         android:layout_height="wrap_content"
         android:layout_margin="10dp"
         app:cardElevation="2dp">
@@ -124,6 +125,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/headline2"
+                android:visibility="visible"
                 android:layout_marginStart="10dp"
                 android:layout_marginTop="10dp"
                 android:layout_marginEnd="10dp"
@@ -191,6 +193,7 @@
         android:id="@+id/nextBTN"
         android:layout_width="150dp"
         android:layout_height="60dp"
+        android:visibility="gone"
         android:layout_below="@id/questionCard"
         android:layout_centerHorizontal="true"
         android:backgroundTint="@color/purple_700"

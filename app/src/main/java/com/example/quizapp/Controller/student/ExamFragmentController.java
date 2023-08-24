@@ -35,9 +35,8 @@ import retrofit2.Response;
 public class ExamFragmentController implements StudentQuestionAdapter.ExamInterface {
 
     List<StudentQuestionModel> studentQuestionModelList;
-    int index=0;
+    int index = 0;
     private static final String TAG = "ExamFragmentController";
-
 
 
     public void showQuestions(RecyclerView recyclerView, Context context, String r_code, TextView noExamTV, Button submitBTN, String s_id) {
@@ -212,13 +211,11 @@ public class ExamFragmentController implements StudentQuestionAdapter.ExamInterf
             @Override
             public void onResponse(Call<PostRetrofitModel> call, Response<PostRetrofitModel> response) {
                 if (response.body().getReply().equals("100")) {
-
-
                     noExamTV.setVisibility(View.VISIBLE);
                     noExamTV.setText("You have already attempted this exam!");
                     binding.nextBTN.setVisibility(View.GONE);
                 } else {
-                    getQuestion(r_code,questionNumber,binding);
+                    getQuestion(r_code, questionNumber, binding);
                 }
             }
 
@@ -237,11 +234,16 @@ public class ExamFragmentController implements StudentQuestionAdapter.ExamInterf
             @Override
             public void onResponse(Call<List<StudentQuestionModel>> call, Response<List<StudentQuestionModel>> response) {
 
-                studentQuestionModelList=response.body();
-                Log.d(TAG, "onResponse: "+studentQuestionModelList.toString());
+                studentQuestionModelList = response.body();
+                Log.d(TAG, "onResponse: " + studentQuestionModelList.toString());
 
-                setQuestion(0,binding);
-
+                if (studentQuestionModelList.size()>0){
+                    setQuestion(0, binding);
+                    binding.notStartTV.setVisibility(View.GONE);
+                }
+                else {
+                    binding.notStartTV.setVisibility(View.VISIBLE);
+                }
 
 
 
@@ -255,25 +257,48 @@ public class ExamFragmentController implements StudentQuestionAdapter.ExamInterf
     }
 
     private void setQuestion(int _index, FragmentExamTwoBinding binding) {
-        if (_index<studentQuestionModelList.size()){
+        binding.questionCard.setVisibility(View.VISIBLE);
+        binding.nextBTN.setVisibility(View.VISIBLE);
+
+        if (_index < studentQuestionModelList.size()) {
+
 
             //StudentQuestionModel model = response.body().get(questionNumber);
             StudentQuestionModel model = studentQuestionModelList.get(_index);
-            Log.d(TAG, "setQuestion: "+model.toString());
-            Log.d(TAG, "binding: "+binding);
+            Log.d(TAG, "setQuestion: " + model.toString());
+            Log.d(TAG, "binding: " + binding);
 
 
-            if (model.getqType().equals("0")  ) {
+            if (model.getqType().equals("0")) {
                 Log.d(TAG, "getqType: 0");
-                binding.questionTV.setText(model.getqQuestion());
+
+                binding.questionTV.setVisibility(View.VISIBLE);
+                binding.questionTV.setVisibility(View.VISIBLE);
+                binding.optionATV.setVisibility(View.VISIBLE);
+                binding.optionBTV.setVisibility(View.VISIBLE);
+                binding.optionCTV.setVisibility(View.VISIBLE);
+                binding.optionDTV.setVisibility(View.VISIBLE);
+                binding.totalMarksTV.setVisibility(View.VISIBLE);
+                binding.headline2.setVisibility(View.VISIBLE);
+                binding.answerET.setVisibility(View.GONE);
+                binding.radioGroup.setVisibility(View.VISIBLE);
+                binding.optionARadio.setVisibility(View.VISIBLE);
+                binding.optionBRadio.setVisibility(View.VISIBLE);
+                binding.optionCRadio.setVisibility(View.VISIBLE);
+                binding.optionDRadio.setVisibility(View.VISIBLE);
+
+
+
+
+
+
+                binding.questionTV.setText("Q: "+model.getqQuestion());
                 binding.optionATV.setText("a) " + model.getqA());
                 binding.optionBTV.setText("b) " + model.getqB());
                 binding.optionCTV.setText("c) " + model.getqC());
                 binding.optionDTV.setText("d) " + model.getqD());
                 binding.totalMarksTV.setText("Total marks: " + model.getqMarks());
                 binding.headline2.setText("Choose the right answer: ");
-
-                binding.answerET.setVisibility(View.GONE);
 
                 binding.radioGroup.clearCheck();
 
@@ -297,11 +322,13 @@ public class ExamFragmentController implements StudentQuestionAdapter.ExamInterf
 
             } else if (Objects.equals(model.getqType(), "1")) {
                 Log.d(TAG, "getqType: 1");
-                binding.questionTV.setText(model.getqQuestion());
-                binding.optionATV.setText("a) " + model.getqA());
-                binding.optionBTV.setText("b) " + model.getqB());
-                binding.totalMarksTV.setText("Total marks: " + model.getqMarks());
-                binding.headline2.setText("Choose the right answer: ");
+
+                binding.questionTV.setVisibility(View.VISIBLE);
+                binding.optionATV.setVisibility(View.VISIBLE);
+                binding.optionBTV.setVisibility(View.VISIBLE);
+                binding.totalMarksTV.setVisibility(View.VISIBLE);
+                binding.headline2.setVisibility(View.VISIBLE);
+                binding.radioGroup.setVisibility(View.VISIBLE);
 
                 binding.optionCTV.setVisibility(View.GONE);
                 binding.optionDTV.setVisibility(View.GONE);
@@ -309,6 +336,12 @@ public class ExamFragmentController implements StudentQuestionAdapter.ExamInterf
                 binding.optionCRadio.setVisibility(View.GONE);
                 binding.optionDRadio.setVisibility(View.GONE);
 
+
+                binding.questionTV.setText("Q: "+model.getqQuestion());
+                binding.optionATV.setText("a) " + model.getqA());
+                binding.optionBTV.setText("b) " + model.getqB());
+                binding.totalMarksTV.setText("Total marks: " + model.getqMarks());
+                binding.headline2.setText("Choose the right answer: ");
 
                 binding.radioGroup.clearCheck();
 
@@ -332,18 +365,26 @@ public class ExamFragmentController implements StudentQuestionAdapter.ExamInterf
 
             } else if (Objects.equals(model.getqType(), "2")) {
                 Log.d(TAG, "getqType: 2");
-                binding.questionTV.setText(model.getqQuestion());
-                binding.totalMarksTV.setText("Total marks: " + model.getqMarks());
-                binding.headline2.setText("Write the answer below: ");
-
+                binding.questionTV.setVisibility(View.VISIBLE);
+                binding.totalMarksTV.setVisibility(View.VISIBLE);
+                binding.headline2.setVisibility(View.VISIBLE);
+                binding.answerET.setVisibility(View.VISIBLE);
+                binding.radioGroup.setVisibility(View.GONE);
                 binding.optionATV.setVisibility(View.GONE);
                 binding.optionBTV.setVisibility(View.GONE);
                 binding.optionCTV.setVisibility(View.GONE);
                 binding.optionDTV.setVisibility(View.GONE);
-                binding.optionARadio.setVisibility(View.GONE);
-                binding.optionBRadio.setVisibility(View.GONE);
-                binding.optionCRadio.setVisibility(View.GONE);
-                binding.optionDRadio.setVisibility(View.GONE);
+
+//                binding.optionARadio.setVisibility(View.GONE);
+//                binding.optionBRadio.setVisibility(View.GONE);
+//                binding.optionCRadio.setVisibility(View.GONE);
+//                binding.optionDRadio.setVisibility(View.GONE);
+
+                binding.questionTV.setText("Q: "+model.getqQuestion());
+                binding.totalMarksTV.setText("Total marks: " + model.getqMarks());
+                binding.headline2.setText("Write the answer below: ");
+
+
 
                 binding.answerET.addTextChangedListener(new TextWatcher() {
                     @Override
@@ -364,31 +405,16 @@ public class ExamFragmentController implements StudentQuestionAdapter.ExamInterf
                 });
 
             }
-        }
-        else {
-            index=0;
-            Toast.makeText(binding.getRoot().getContext(), "List finish"+_index, Toast.LENGTH_SHORT).show();
+        } else {
+            // index=0;
+            Toast.makeText(binding.getRoot().getContext(), "List finish" + _index, Toast.LENGTH_SHORT).show();
 
         }
     }
 
-    public void nextQuestion(FragmentExamTwoBinding binding)
-    {
+    public void nextQuestion(FragmentExamTwoBinding binding) {
         index++;
-        setQuestion(index,binding);
-    }
-
-    public void nextBTN(int point,Context context, String r_code, String s_id, TextView noExamTV,
-                        int questionNumber, FragmentExamTwoBinding binding){
-        Toast.makeText(context, ""+point, Toast.LENGTH_SHORT).show();
-        
-        try {
-            showSeparateQuestions(context, r_code, s_id, noExamTV, questionNumber, binding);
-        }
-        catch (Exception e){
-            Toast.makeText(context, "List Completed", Toast.LENGTH_SHORT).show();
-        }
-        
+        setQuestion(index, binding);
     }
 
 

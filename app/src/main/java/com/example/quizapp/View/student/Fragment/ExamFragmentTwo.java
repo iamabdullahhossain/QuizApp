@@ -15,7 +15,6 @@ import com.example.quizapp.model.student.StudentJoinedRoomModel;
 
 public class ExamFragmentTwo extends Fragment {
     FragmentExamTwoBinding binding;
-
     StudentJoinedRoomModel model;
     ExamFragmentController controller;
     int number = 0;
@@ -39,13 +38,6 @@ public class ExamFragmentTwo extends Fragment {
 
         number++;
         binding.nextBTN.setOnClickListener(view -> {
-            /*controller.nextBTN(number,
-                    binding.getRoot().getContext(),
-                    model.getrCode(),
-                    model.getsId(),
-                    binding.notStartTV,
-                    number,
-                    binding);*/
             controller.nextQuestion(binding);
             number++;
         });

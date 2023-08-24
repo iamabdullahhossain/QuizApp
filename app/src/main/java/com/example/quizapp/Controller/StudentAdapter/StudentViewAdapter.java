@@ -32,7 +32,7 @@ public class StudentViewAdapter extends FragmentPagerAdapter {
 
         switch (position) {
             case 0:
-              //  ExamFragment examFragment = new ExamFragment(model);
+               //ExamFragment examFragment = new ExamFragment(model);
                 ExamFragmentTwo examFragment = new ExamFragmentTwo(model);
                 return examFragment;
             case 1:
