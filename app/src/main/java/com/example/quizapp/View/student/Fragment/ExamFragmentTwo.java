@@ -28,17 +28,19 @@ public class ExamFragmentTwo extends Fragment {
                              Bundle savedInstanceState) {
         binding = FragmentExamTwoBinding.inflate(getLayoutInflater());
 
-        controller = new ExamFragmentController();
+        controller = new ExamFragmentController(model);
         controller.showSeparateQuestions(binding.getRoot().getContext(),
                 model.getrCode(),
                 model.getsId(),
                 binding.notStartTV,
                 number,
-                binding);
+                binding,
+                this);
 
         number++;
         binding.nextBTN.setOnClickListener(view -> {
-            controller.nextQuestion(binding, model);
+
+            controller.nextQuestion(binding, model, this);
 
             number++;
         });

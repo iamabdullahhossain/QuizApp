@@ -39,7 +39,7 @@ public class ExamFragment extends Fragment {
         // Inflate the layout for this fragment
         binding = FragmentExamBinding.inflate(getLayoutInflater());
 
-        controller = new ExamFragmentController();
+        controller = new ExamFragmentController(model);
         controller.showQuestions(binding.recyclerView, binding.getRoot().getContext(), model.getrCode(), binding.notStartTV, binding.submitBTN, model.getsId());
 
         binding.submitBTN.setOnClickListener(view -> {

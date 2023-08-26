@@ -17,6 +17,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.quizapp.Controller.StudentAdapter.StudentQuestionAdapter;
 import com.example.quizapp.View.student.Fragment.ExamFragment;
+import com.example.quizapp.View.student.Fragment.ExamFragmentTwo;
 import com.example.quizapp.View.student.StudentSubmitActivity;
 import com.example.quizapp.databinding.FragmentExamTwoBinding;
 import com.example.quizapp.model.retrofit.APICONTROLLER;
@@ -35,8 +36,17 @@ import retrofit2.Response;
 public class ExamFragmentController implements StudentQuestionAdapter.ExamInterface {
 
     List<StudentQuestionModel> studentQuestionModelList;
+    StudentJoinedRoomModel studentJoinedRoomModel;
+
+    public ExamFragmentController(StudentJoinedRoomModel studentJoinedRoomModel) {
+        this.studentJoinedRoomModel = studentJoinedRoomModel;
+    }
+
     int index = 0;
     String answer = null;
+    String mainAnswer = null;
+    String qID = null;
+    String q_marks = null;
     private static final String TAG = "ExamFragmentController";
 
 
@@ -134,7 +144,7 @@ public class ExamFragmentController implements StudentQuestionAdapter.ExamInterf
 
     }
 
-    private void attempted(StudentJoinedRoomModel model) {
+    public void attempted(StudentJoinedRoomModel model) {
 
         Call<PostRetrofitModel> attempt = APICONTROLLER.getInstance().getAPI().attend(
                 model.getsId(),
@@ -205,7 +215,7 @@ public class ExamFragmentController implements StudentQuestionAdapter.ExamInterf
     }
 
     public void showSeparateQuestions(Context context, String r_code, String s_id, TextView noExamTV,
-                                      int questionNumber, FragmentExamTwoBinding binding) {
+                                      int questionNumber, FragmentExamTwoBinding binding, ExamFragmentTwo fragment) {
 
         Call<PostRetrofitModel> check = APICONTROLLER.getInstance().getAPI().checkAttempt(s_id, r_code);
         check.enqueue(new Callback<PostRetrofitModel>() {
@@ -216,7 +226,7 @@ public class ExamFragmentController implements StudentQuestionAdapter.ExamInterf
                     noExamTV.setText("You have already attempted this exam!");
                     binding.nextBTN.setVisibility(View.GONE);
                 } else {
-                    getQuestion(r_code, questionNumber, binding);
+                    getQuestion(r_code, questionNumber, binding, fragment);
                 }
             }
 
@@ -229,7 +239,7 @@ public class ExamFragmentController implements StudentQuestionAdapter.ExamInterf
 
     }
 
-    private void getQuestion(String r_code, int questionNumber, FragmentExamTwoBinding binding) {
+    private void getQuestion(String r_code, int questionNumber, FragmentExamTwoBinding binding, ExamFragmentTwo fragment) {
         Call<List<StudentQuestionModel>> question = APICONTROLLER.getInstance().getAPI().question(r_code);
         question.enqueue(new Callback<List<StudentQuestionModel>>() {
             @Override
@@ -238,14 +248,12 @@ public class ExamFragmentController implements StudentQuestionAdapter.ExamInterf
                 studentQuestionModelList = response.body();
                 Log.d(TAG, "onResponse: " + studentQuestionModelList.toString());
 
-                if (studentQuestionModelList.size()>0){
-                    setQuestion(0, binding);
+                if (studentQuestionModelList.size() > 0) {
+                    setQuestion(0, binding, fragment);
                     binding.notStartTV.setVisibility(View.GONE);
-                }
-                else {
+                } else {
                     binding.notStartTV.setVisibility(View.VISIBLE);
                 }
-
 
 
             }
@@ -257,13 +265,13 @@ public class ExamFragmentController implements StudentQuestionAdapter.ExamInterf
         });
     }
 
-    private void setQuestion(int _index, FragmentExamTwoBinding binding) {
+    public void setQuestion(int _index, FragmentExamTwoBinding binding, ExamFragmentTwo fragment) {
 
         binding.questionCard.setVisibility(View.VISIBLE);
         binding.nextBTN.setVisibility(View.VISIBLE);
 
-        if (_index < studentQuestionModelList.size()) {
 
+        if (_index < studentQuestionModelList.size()) {
 
             //StudentQuestionModel model = response.body().get(questionNumber);
             StudentQuestionModel model = studentQuestionModelList.get(_index);
@@ -273,6 +281,9 @@ public class ExamFragmentController implements StudentQuestionAdapter.ExamInterf
 
             if (model.getqType().equals("0")) {
                 Log.d(TAG, "getqType: 0");
+                mainAnswer = model.getqAns();
+                qID = model.getId();
+                q_marks = model.getqMarks();
 
                 binding.questionTV.setVisibility(View.VISIBLE);
                 binding.questionTV.setVisibility(View.VISIBLE);
@@ -290,11 +301,7 @@ public class ExamFragmentController implements StudentQuestionAdapter.ExamInterf
                 binding.optionDRadio.setVisibility(View.VISIBLE);
 
 
-
-
-
-
-                binding.questionTV.setText("Q: "+model.getqQuestion());
+                binding.questionTV.setText("Q: " + model.getqQuestion());
                 binding.optionATV.setText("a) " + model.getqA());
                 binding.optionBTV.setText("b) " + model.getqB());
                 binding.optionCTV.setText("c) " + model.getqC());
@@ -315,6 +322,9 @@ public class ExamFragmentController implements StudentQuestionAdapter.ExamInterf
                         } else {
                             RadioButton radioButton = binding.radioGroup.findViewById(selectedID);
                             // examInterface.getAnswer(radioButton.getText().toString(), model, list, position);
+                            //answer = radioButton.getText().toString();
+
+                            model.setS_answer(radioButton.getText().toString());
                         }
 
 
@@ -324,6 +334,9 @@ public class ExamFragmentController implements StudentQuestionAdapter.ExamInterf
 
             } else if (Objects.equals(model.getqType(), "1")) {
                 Log.d(TAG, "getqType: 1");
+                mainAnswer = model.getqAns();
+                qID = model.getId();
+                q_marks = model.getqMarks();
 
                 binding.questionTV.setVisibility(View.VISIBLE);
                 binding.optionATV.setVisibility(View.VISIBLE);
@@ -339,7 +352,7 @@ public class ExamFragmentController implements StudentQuestionAdapter.ExamInterf
                 binding.optionDRadio.setVisibility(View.GONE);
 
 
-                binding.questionTV.setText("Q: "+model.getqQuestion());
+                binding.questionTV.setText("Q: " + model.getqQuestion());
                 binding.optionATV.setText("a) " + model.getqA());
                 binding.optionBTV.setText("b) " + model.getqB());
                 binding.totalMarksTV.setText("Total marks: " + model.getqMarks());
@@ -358,6 +371,8 @@ public class ExamFragmentController implements StudentQuestionAdapter.ExamInterf
                         } else {
                             RadioButton radioButton = binding.radioGroup.findViewById(selectedID);
                             //  examInterface.getAnswer(radioButton.getText().toString(), model, list, position);
+                            // answer = radioButton.getText().toString();
+                            model.setS_answer(radioButton.getText().toString());
                         }
 
 
@@ -367,6 +382,10 @@ public class ExamFragmentController implements StudentQuestionAdapter.ExamInterf
 
             } else if (Objects.equals(model.getqType(), "2")) {
                 Log.d(TAG, "getqType: 2");
+                mainAnswer = model.getqAns();
+                qID = model.getId();
+                q_marks = model.getqMarks();
+
                 binding.questionTV.setVisibility(View.VISIBLE);
                 binding.totalMarksTV.setVisibility(View.VISIBLE);
                 binding.headline2.setVisibility(View.VISIBLE);
@@ -382,10 +401,9 @@ public class ExamFragmentController implements StudentQuestionAdapter.ExamInterf
 //                binding.optionCRadio.setVisibility(View.GONE);
 //                binding.optionDRadio.setVisibility(View.GONE);
 
-                binding.questionTV.setText("Q: "+model.getqQuestion());
+                binding.questionTV.setText("Q: " + model.getqQuestion());
                 binding.totalMarksTV.setText("Total marks: " + model.getqMarks());
                 binding.headline2.setText("Write the answer below: ");
-
 
 
                 binding.answerET.addTextChangedListener(new TextWatcher() {
@@ -403,28 +421,68 @@ public class ExamFragmentController implements StudentQuestionAdapter.ExamInterf
                     public void afterTextChanged(Editable editable) {
 
                         // examInterface.getAnswer(editable+"", model, list, position);
+                        model.setS_answer(editable.toString());
                     }
                 });
 
+
             }
         } else {
-            // index=0;
-            Toast.makeText(binding.getRoot().getContext(), "List finish" + _index, Toast.LENGTH_SHORT).show();
+
+            attempted(studentJoinedRoomModel);
+
+            binding.getRoot().getContext().startActivity(new Intent(binding.getRoot().getContext(), StudentSubmitActivity.class));
+            fragment.getActivity().finish();
+
 
         }
     }
 
-    public void nextQuestion(FragmentExamTwoBinding binding, StudentJoinedRoomModel model) {
+    public void nextQuestion(FragmentExamTwoBinding binding, StudentJoinedRoomModel model, ExamFragmentTwo fragment) {
+
+
         index++;
-        setQuestion(index, binding);
+        setQuestion(index, binding, fragment);
+        attempted(model);
+        submitAnswer(model, index-1);
+
 
     }
 
-    public void submitAnswer(FragmentExamTwoBinding binding, String answer, StudentJoinedRoomModel model){
+    public void submitAnswer(StudentJoinedRoomModel studentJoinedRoomModel, int pos) {
+
+        Call<PostRetrofitModel> postAnswer = APICONTROLLER.getInstance().getAPI().answer(
+                studentJoinedRoomModel.getsName(),
+                studentJoinedRoomModel.getsId(),
+                studentJoinedRoomModel.getsUniquecode(),
+                studentJoinedRoomModel.getrBatch(),
+                studentQuestionModelList.get(0).gettName(),
+                studentQuestionModelList.get(0).gettUniquecode(),
+                studentQuestionModelList.get(0).getrCode(),
+                studentJoinedRoomModel.getrName(),
+                studentQuestionModelList.get(pos).getqQuestion(),
+                studentQuestionModelList.get(pos).getId(),
+                studentQuestionModelList.get(pos).getqAns(),
+                studentQuestionModelList.get(pos).getS_answer(),
+                studentQuestionModelList.get(pos).getqMarks()
+
+
+        );
+
+        postAnswer.enqueue(new Callback<PostRetrofitModel>() {
+            @Override
+            public void onResponse(Call<PostRetrofitModel> call, Response<PostRetrofitModel> response) {
+
+            }
+
+            @Override
+            public void onFailure(Call<PostRetrofitModel> call, Throwable t) {
+
+            }
+        });
+
 
     }
-
-
 
 
 }
